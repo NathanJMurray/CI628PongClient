@@ -102,6 +102,6 @@ void MyGame::render(SDL_Renderer* renderer) {
         SDL_RenderCopy(renderer, scoreFont.texture, NULL, &score);
     }
 
-    SDL_RenderFillRect(renderer, &score);
+    //SDL_RenderFillRect(renderer, &score);
 }
 

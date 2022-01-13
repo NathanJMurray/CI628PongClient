@@ -38,7 +38,6 @@ class Font {
                 if (texture == NULL) {
                     std::cout << "unable to create texture from rendered text. SDL Error: %\n" << std::endl;
                 }
-                SDL_FreeSurface(tempsurface);
             }            
         }    
 };
