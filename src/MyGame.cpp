@@ -1,5 +1,39 @@
 #include "MyGame.h"
 
+SDL_Texture* Texture::LoadTexture(const char* texture, SDL_Renderer* ren) {
+    SDL_Surface* tempSurface = IMG_Load(texture);
+    SDL_Texture* tex = SDL_CreateTextureFromSurface(ren, tempSurface);
+    SDL_FreeSurface(tempSurface);
+
+    return tex;
+}
+
+SDL_Texture* ballTex;
+
+
+
+//SDL_Texture* Font::CreateTextTexture(TTF_Font* font, std::string text, SDL_Renderer* ren) {
+    //SDL_Surface* tempSurface = TTF_RenderText_Solid(font, text.c_str(), { 255, 255, 255 });
+    //SDL_Texture* tex = SDL_CreateTextureFromSurface(ren, tempSurface);
+    //SDL_FreeSurface(tempSurface);
+
+    //return tex;
+//}
+
+//SDL_Texture* Font;
+
+//TTF_Font* Font::GetFont(std::string filename, int size) {
+//    std::string fullPath = SDL_GetBasePath();
+//    fullPath.append("assests/" + filename);
+//    std::string key = fullPath + (char)size;
+//}
+//
+//SDL_Texture* Font::GetText(std::string text, std::string filename, int size) {
+//    TTF_Font* font = GetFont(filename, size);
+//    std::string key = text + filename + (char)size;
+//}
+//SDL_Texture* scoretxt;
+
 void MyGame::on_receive(std::string cmd, std::vector<std::string>& args) {
     if (cmd == "GAME_DATA") {
         // we should have exactly 4 arguments
@@ -20,6 +54,7 @@ void MyGame::send(std::string message) {
 
 void MyGame::input(SDL_Event& event) {
     switch (event.key.keysym.sym) {
+        //checks for key down event on the W key
         case SDLK_w:
             send(event.type == SDL_KEYDOWN ? "W_DOWN" : "W_UP");
             break;
@@ -42,6 +77,10 @@ void MyGame::input(SDL_Event& event) {
 }
 
 void MyGame::update() {
+    //Player1.X = 200;
+    //Player1.Y = 0;
+    //Player1.Width = 20;
+    //Player1.Height = 60;
     player1.y = game_data.player1Y;
     
     //updates the Y position of the player 2 
@@ -55,17 +94,24 @@ void MyGame::update() {
 }
 
 void MyGame::render(SDL_Renderer* renderer) {
+    SDL_RenderCopy(renderer, ballTex, NULL, &ball);
+    //SDL_RenderCopy(renderer, scoreTxt, NULL, &score);
+
     SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
-    //SDL_RenderDrawRect(renderer, &player1);
-    
+        
     //Draws a filled rect for the player 1
+    //SDL_RenderFillRect(renderer, player1);
     SDL_RenderFillRect(renderer, &player1);
-    //SDL_RenderDrawRect(renderer, &player2);
+
 
     //Draws a filled rect for the player 2
     SDL_RenderFillRect(renderer, &player2);
-    //SDL_RenderDrawRect(renderer, &ball);
+    //SDL_RenderDrawRect(renderer, player2);
 
-    //Draws a filled rect for the ball
-    SDL_RenderFillRect(renderer, &ball);
+    //Draws a filled rect for the ball    
+    //SDL_RenderFillRect(renderer, &ball);
+    
+    ballTex = Texture::LoadTexture("assets/SoccerBallV7.png", renderer);
+    //Font = Texture::LoadTexture("assets/calibri.ttf", renderer);
 }
+
