@@ -74,19 +74,15 @@ void MyGame::update() {
     ball.x = game_data.ballX;
 }
 
-void MyGame::render(SDL_Renderer* renderer) {
-    
-
+void MyGame::render(SDL_Renderer* renderer) { 
     SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
         
     //Draws a filled rect for the player 1
-    //SDL_RenderFillRect(renderer, player1);
     SDL_RenderFillRect(renderer, &player1);
 
 
     //Draws a filled rect for the player 2
     SDL_RenderFillRect(renderer, &player2);
-    //SDL_RenderDrawRect(renderer, player2);
 
     //Draws a filled rect for the ball    
     //SDL_RenderFillRect(renderer, &ball);
