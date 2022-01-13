@@ -35,14 +35,19 @@ class Texture {
     
 //};
 
-//class Font { 
-    //public:
-        //static SDL_Texture* CreateTextTexture(TTF_Font* font, std::string text, SDL_Renderer* ren);
-        //SDL_Texture* GetText(std::string text, std::string filename, int size);
+class Font { 
+    public:
+        static SDL_Texture* CreateTextTexture(TTF_Font* font, std::string text, SDL_Renderer* ren);
+        SDL_Texture* GetText(std::string text, std::string filename, int size);
 
     //private:
         //TTF_Font* GetFont(std::string filename, int size);
-//};
+};
+
+class Rect {
+    public:
+        SDL_Rect score = { 0, 0, 50, 100 };
+};
 
 class MyGame {
 
@@ -52,7 +57,6 @@ class MyGame {
 
         SDL_Rect player2 = { 580, 0, 20, 60 };
         SDL_Rect ball = { 0, 0, 15, 15 };
-        SDL_Rect score = { 0, 0, 50, 100};
 
     public:
         std::vector<std::string> messages;
