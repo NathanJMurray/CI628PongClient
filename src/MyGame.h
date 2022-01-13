@@ -8,60 +8,43 @@
 #include "SDL.h"
 #include "SDL_image.h"
 #include "SDL_ttf.h"
-#include "SDL_mixer.h"
 
 static struct GameData {
     int player1Y = 0;
     int player2Y = 0;
     int ballX = 0;
     int ballY = 0;
+    int score1 = 0;
+    int score2 = 0;
 } game_data;
  
-//class Player {
-    //public:
-        //int X;
-        //int Y;
-        //int Width;
-        //int Height;
-        //SDL_Rect player = { X, Y, Width, Height };
-//};
 
 class Texture {
     public:
         static SDL_Texture* LoadTexture(const char* filename, SDL_Renderer* ren);
 };
 
-//class applauseFX {
-    
-//};
 
 class Font { 
     public:
-        TTF_Font* font = TTF_OpenFont("assets/arial.ttf", 25);
-        //static SDL_Texture* CreateTextTexture(TTF_Font* font, std::string text, SDL_Renderer* ren);
-        //SDL_Texture* GetText(std::string text, std::string filename, int size);
-        SDL_Surface* surface = TTF_RenderText_Solid(font, "Hi", { 255, 255, 255 });
+        TTF_Font* font = TTF_OpenFont("assets/arial.ttf", 100);
+        SDL_Color White = { 255, 255, 255 };
+        SDL_Surface* surface = TTF_RenderText_Solid(font, "Hi", White);
         SDL_Texture* texture = nullptr;
         void fontRender(SDL_Renderer* render) {
             texture = SDL_CreateTextureFromSurface(render, surface);
         }
-
-
-    //private:
-        //TTF_Font* GetFont(std::string filename, int size);
 };
 
 class Rect {
     public:
-        SDL_Rect score = { 0, 0, 50, 100 };
+        SDL_Rect score = { 400, 400, 100, 100 };
 };
 
 class MyGame {
 
     private:
         SDL_Rect player1 = { 200, 0, 20, 60 };
-        //Player Player1;
-
         SDL_Rect player2 = { 580, 0, 20, 60 };
         SDL_Rect ball = { 0, 0, 15, 15 };
 

@@ -13,30 +13,6 @@ SDL_Texture* Texture::LoadTexture(const char* texture, SDL_Renderer* ren) {
 
 SDL_Texture* ballTex;
 
-
-
-//SDL_Texture* Font::CreateTextTexture(TTF_Font* font, std::string text, SDL_Renderer* ren) {
-    //SDL_Surface* tempSurface = TTF_RenderText_Solid(font, text.c_str(), { 255, 255, 255 });
-    //SDL_Texture* tex = SDL_CreateTextureFromSurface(ren, tempSurface);
-    //SDL_FreeSurface(tempSurface);
-
-    //return tex;
-//}
-
-//SDL_Texture* Font;
-
-//TTF_Font* Font::GetFont(std::string filename, int size) {
-//    std::string fullPath = SDL_GetBasePath();
-//    fullPath.append("assests/" + filename);
-//    std::string key = fullPath + (char)size;
-//}
-//
-//SDL_Texture* Font::GetText(std::string text, std::string filename, int size) {
-//    TTF_Font* font = GetFont(filename, size);
-//    std::string key = text + filename + (char)size;
-//}
-//SDL_Texture* scoretxt;
-
 void MyGame::on_receive(std::string cmd, std::vector<std::string>& args) {
     if (cmd == "GAME_DATA") {
         // we should have exactly 4 arguments
@@ -46,7 +22,12 @@ void MyGame::on_receive(std::string cmd, std::vector<std::string>& args) {
             game_data.ballX = stoi(args.at(2));
             game_data.ballY = stoi(args.at(3));
         }
-    } else {
+    }
+    else if (cmd == "SCORES") {
+            game_data.score1 = stoi(args.at(0));
+            game_data.score2 = stoi(args.at(1));
+    }
+    else {
         std::cout << "Received: " << cmd << std::endl;
     }
 }
@@ -80,10 +61,7 @@ void MyGame::input(SDL_Event& event) {
 }
 
 void MyGame::update() {
-    //Player1.X = 200;
-    //Player1.Y = 0;
-    //Player1.Width = 20;
-    //Player1.Height = 60;
+    
     player1.y = game_data.player1Y;
     
     //updates the Y position of the player 2 
@@ -118,6 +96,11 @@ void MyGame::render(SDL_Renderer* renderer) {
     //Font = Texture::LoadTexture("assets/calibri.ttf", renderer);
 
     scoreFont.fontRender(renderer);
-    SDL_RenderCopy(renderer, scoreFont.texture, NULL, &scoreRect.score);
+    if (scoreFont.texture == NULL) {
+        std::cout << "No Texture" << std::endl;
+    }
+    else {
+        SDL_RenderCopy(renderer, scoreFont.texture, NULL, &scoreRect.score);
+    }
 }
 
