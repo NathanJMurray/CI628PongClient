@@ -27,7 +27,7 @@ class Texture {
 
 class Font { 
     public:
-        TTF_Font* font = TTF_OpenFont("assets/arial.ttf", 100);
+        TTF_Font* font = TTF_OpenFont("assets/arial.ttf", 25);
         SDL_Color RED = { 255, 0, 0 };
         SDL_Surface* tempsurface = TTF_RenderText_Solid(font, "Hi", RED);
         SDL_Texture* texture = nullptr;
