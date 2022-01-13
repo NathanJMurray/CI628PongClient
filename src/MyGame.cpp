@@ -1,6 +1,5 @@
 #include "MyGame.h"
 
-Rect scoreRect;
 Font scoreFont;
 
 SDL_Texture* Texture::LoadTexture(const char* texture, SDL_Renderer* ren) {
@@ -62,6 +61,7 @@ void MyGame::input(SDL_Event& event) {
 
 void MyGame::update() {
     
+    //updates the Y position of the player 2
     player1.y = game_data.player1Y;
     
     //updates the Y position of the player 2 
@@ -75,8 +75,7 @@ void MyGame::update() {
 }
 
 void MyGame::render(SDL_Renderer* renderer) {
-    SDL_RenderCopy(renderer, ballTex, NULL, &ball);
-    //SDL_RenderCopy(renderer, scoreTxt, NULL, &score);
+    
 
     SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
         
@@ -93,14 +92,20 @@ void MyGame::render(SDL_Renderer* renderer) {
     //SDL_RenderFillRect(renderer, &ball);
     
     ballTex = Texture::LoadTexture("assets/SoccerBallV7.png", renderer);
-    //Font = Texture::LoadTexture("assets/calibri.ttf", renderer);
+    SDL_RenderCopy(renderer, ballTex, NULL, &ball);
 
-    scoreFont.fontRender(renderer);
+    if (score.w == NULL) {
+        std::cout << "rect is empty" << std::endl;
+    }
+
+    scoreFont.fontRender(renderer); 
     if (scoreFont.texture == NULL) {
         std::cout << "No Texture" << std::endl;
     }
     else {
-        SDL_RenderCopy(renderer, scoreFont.texture, NULL, &scoreRect.score);
+        SDL_RenderCopy(renderer, scoreFont.texture, NULL, &score);
     }
+
+    SDL_RenderFillRect(renderer, &score);
 }
 

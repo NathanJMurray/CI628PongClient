@@ -28,19 +28,21 @@ class Texture {
 class Font { 
     public:
         TTF_Font* font = TTF_OpenFont("assets/arial.ttf", 100);
-        SDL_Color White = { 255, 255, 255 };
-        SDL_Surface* surface = TTF_RenderText_Solid(font, "Hi", White);
+        SDL_Color RED = { 255, 0, 0 };
+        SDL_Surface* tempsurface = TTF_RenderText_Solid(font, "Hi", RED);
         SDL_Texture* texture = nullptr;
         void fontRender(SDL_Renderer* render) {
-            texture = SDL_CreateTextureFromSurface(render, surface);
-            SDL_FreeSurface(surface);
-        }        
+            if (tempsurface != NULL)
+            {
+                texture = SDL_CreateTextureFromSurface(render, tempsurface);
+                if (texture == NULL) {
+                    std::cout << "unable to create texture from rendered text. SDL Error: %\n" << std::endl;
+                }
+                SDL_FreeSurface(tempsurface);
+            }            
+        }    
 };
 
-class Rect {
-    public:
-        SDL_Rect score = { 400, 400, 100, 100 };
-};
 
 class MyGame {
 
@@ -48,6 +50,7 @@ class MyGame {
         SDL_Rect player1 = { 200, 0, 20, 60 };
         SDL_Rect player2 = { 580, 0, 20, 60 };
         SDL_Rect ball = { 0, 0, 15, 15 };
+        SDL_Rect score = { 400, 400, 100, 100 };
 
     public:
         std::vector<std::string> messages;
