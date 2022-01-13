@@ -1,6 +1,7 @@
 #include "MyGame.h"
 
 Rect scoreRect;
+Font scoreFont;
 
 SDL_Texture* Texture::LoadTexture(const char* texture, SDL_Renderer* ren) {
     SDL_Surface* tempSurface = IMG_Load(texture);
@@ -12,13 +13,15 @@ SDL_Texture* Texture::LoadTexture(const char* texture, SDL_Renderer* ren) {
 
 SDL_Texture* ballTex;
 
-SDL_Texture* Font::CreateTextTexture(TTF_Font* font, std::string text, SDL_Renderer* ren) {
-    SDL_Surface* tempSurface = TTF_RenderText_Solid(font, text.c_str(), { 255, 255, 255 });
-    SDL_Texture* tex = SDL_CreateTextureFromSurface(ren, tempSurface);
-    SDL_FreeSurface(tempSurface);
 
-    return tex;
-}
+
+//SDL_Texture* Font::CreateTextTexture(TTF_Font* font, std::string text, SDL_Renderer* ren) {
+    //SDL_Surface* tempSurface = TTF_RenderText_Solid(font, text.c_str(), { 255, 255, 255 });
+    //SDL_Texture* tex = SDL_CreateTextureFromSurface(ren, tempSurface);
+    //SDL_FreeSurface(tempSurface);
+
+    //return tex;
+//}
 
 //SDL_Texture* Font;
 
@@ -113,5 +116,8 @@ void MyGame::render(SDL_Renderer* renderer) {
     
     ballTex = Texture::LoadTexture("assets/SoccerBallV7.png", renderer);
     //Font = Texture::LoadTexture("assets/calibri.ttf", renderer);
+
+    scoreFont.fontRender(renderer);
+    SDL_RenderCopy(renderer, scoreFont.texture, NULL, &scoreRect.score);
 }
 

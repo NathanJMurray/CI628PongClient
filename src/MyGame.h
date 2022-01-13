@@ -37,8 +37,15 @@ class Texture {
 
 class Font { 
     public:
-        static SDL_Texture* CreateTextTexture(TTF_Font* font, std::string text, SDL_Renderer* ren);
-        SDL_Texture* GetText(std::string text, std::string filename, int size);
+        TTF_Font* font = TTF_OpenFont("assets/arial.ttf", 25);
+        //static SDL_Texture* CreateTextTexture(TTF_Font* font, std::string text, SDL_Renderer* ren);
+        //SDL_Texture* GetText(std::string text, std::string filename, int size);
+        SDL_Surface* surface = TTF_RenderText_Solid(font, "Hi", { 255, 255, 255 });
+        SDL_Texture* texture = nullptr;
+        void fontRender(SDL_Renderer* render) {
+            texture = SDL_CreateTextureFromSurface(render, surface);
+        }
+
 
     //private:
         //TTF_Font* GetFont(std::string filename, int size);
