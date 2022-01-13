@@ -33,7 +33,8 @@ class Font {
         SDL_Texture* texture = nullptr;
         void fontRender(SDL_Renderer* render) {
             texture = SDL_CreateTextureFromSurface(render, surface);
-        }
+            SDL_FreeSurface(surface);
+        }        
 };
 
 class Rect {
