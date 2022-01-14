@@ -87,7 +87,7 @@ void MyGame::render(SDL_Renderer* renderer) {
     //Draws a filled rect for the ball    
     //SDL_RenderFillRect(renderer, &ball);
     
-    ballTex = Texture::LoadTexture("assets/SoccerBallV7.png", renderer);
+    ballTex = Texture::LoadTexture("assets/tennis-png-1806.png", renderer);
     SDL_RenderCopy(renderer, ballTex, NULL, &ball);
 
     if (score.w == NULL) {
